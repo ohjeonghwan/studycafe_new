@@ -100,12 +100,12 @@ export function useReservations() {
   }, [toast]);
 
   // 예약 수정
-  const updateReservation = useCallback(async (reservationId: string, formData: ReservationFormData) => {
+  const updateReservation = useCallback(async (reservationId: string, formData: ReservationFormData): Promise<void> => {
     setLoading(true);
     setError(null);
     
     try {
-      const updatedReservation = await reservationApi.updateReservation(reservationId, formData);
+      await reservationApi.updateReservation(reservationId, formData);
       
       // 즉시 최신 예약 목록을 다시 가져와서 상태 업데이트
       const updatedReservations = reservationApi.getAllReservations();
@@ -116,8 +116,6 @@ export function useReservations() {
         description: `좌석 ${formData.seatNumber}번 예약이 수정되었습니다.`,
         variant: 'default',
       });
-      
-      return updatedReservation;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : '예약 수정에 실패했습니다.';
       setError(errorMessage);
