@@ -12,7 +12,10 @@ const config = {
         '2xl': '1400px',
       },
     },
-    extend: {
+      extend: {
+        maxWidth: {
+          '4xl': '200rem',
+        },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
